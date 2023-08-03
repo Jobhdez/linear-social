@@ -1,0 +1,2 @@
+# A basic linear algebra compiler
+This will ultimately be a website and it will include a compiler that lowers a simple linear linear algebra language to C and it will also include an interpreter for this linear algebra language.
