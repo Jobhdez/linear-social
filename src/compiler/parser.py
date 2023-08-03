@@ -74,7 +74,7 @@ def p_expression_sum(p):
 
 def p_expression_minus(p):
     "expression : expression MINUS expression"
-    p[0] = Minus([1], p[3])
+    p[0] = Minus(p[1], p[3])
 
 def p_expression_mul(p):
     "expression : expression MUL expression"
@@ -82,11 +82,11 @@ def p_expression_mul(p):
 
 def p_vector(p):
     "vector : LBRACKET elements RBRACKET"
-    p[0] = Vec(p[2])
+    p[0] = p[2]
 
 def p_matrix(p):
     "matrix : LBRACKET vectors RBRACKET"
-    p[0] = Matrix(p[2])
+    p[0] = p[2]
 
 def p_vectors(p):
     "vectors : vector vectors"
@@ -112,6 +112,7 @@ parser = yacc.yacc()
 ###------------------
 class Exps:
     "PROGRAM node."
+    __match_args__ = ('exp', 'expressions')
     def __init__(self, exp,  expressions):
         self.exp = exp
         self.expressions = expressions
@@ -121,6 +122,7 @@ class Exps:
 
 class Exp:
     "PROGRAM node."
+    __match_args__ = ('exp')
     def __init__(self, exp):
         self.exp = exp
       
@@ -130,6 +132,7 @@ class Exp:
 
 class Int:
     "INT node."
+    __match_args__ = ('num')
     def __init__(self, num):
         self.num = num
 
@@ -137,6 +140,7 @@ class Int:
         return f'(Int {self.num})'
 
 class Vec:
+    __match_args__ = ('elements')
     def __init__(self, elements):
         self.elements = elements
     
@@ -144,6 +148,7 @@ class Vec:
         return f'(Vec {self.elements})'
 
 class Matrix:
+    __match_args__ = ('elements')
     def __init__(self, elements):
         self.elements = elements
     
@@ -152,6 +157,7 @@ class Matrix:
 
 
 class Var:
+    __match_args__ = ('var')
     def __init__(self, var):
         self.var = var
 
@@ -160,6 +166,7 @@ class Var:
 
 
 class Sum:
+    __match_args__ = ('e1', 'e2')
     def __init__(self, e1, e2):
         self.e1 = e1
         self.e2 = e2
@@ -169,6 +176,7 @@ class Sum:
 
 
 class Minus:
+    __match_args__ = ('e1', 'e2')
     def __init__(self, e1, e2):
         self.e1 = e1
         self.e2 = e2
@@ -177,6 +185,7 @@ class Minus:
         return f'(Minus {self.e1} {self.e2})'
 
 class Product:
+    __match_args__ = ('e1', 'e2')
     def __init__(self, e1, e2):
         self.e1 = e1
         self.e2 = e2
@@ -185,6 +194,7 @@ class Product:
         return f'(Product {self.e1} {self.e2})'
 
 class Elements:
+    __match_args__ = ('e1', 'elements')
     "PROGRAM node."
     def __init__(self, e1,  elements):
         self.e1 = e1
@@ -194,6 +204,7 @@ class Elements:
         return f'(Elements {self.e1}  {self.elements})'
 
 class Element:
+    __match_args__ = ('exp')
     "PROGRAM node."
     def __init__(self, exp):
         self.exp = exp
@@ -203,10 +214,11 @@ class Element:
         return f'(Element { self.exp})'
 
 class Vectors:
+    __match_args__ = ('exp', 'expressions')
     "PROGRAM node."
     def __init__(self, exp,  expressions):
         self.exp = exp
         self.expressions = expressions
 
     def __repr__(self):
-        return f'(Exps {self.exp}  {self.expressions})'
+        return f'(Vectors {self.exp}  {self.expressions})'
