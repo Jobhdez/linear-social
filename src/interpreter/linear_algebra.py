@@ -5,8 +5,11 @@ from operator import (
     mul,
 )
 
+"""Module corresponding to the linear algebra functions that `evaluate` in
+src.interpreter.interpreter uses."""
+
 class Number:
-    
+
     def __add__(self, other):
         
         return self.add(other)

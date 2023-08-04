@@ -15,7 +15,19 @@ from parser import (
 from utils import get_vector_elements, get_matrix_elements
 from linear_algebra import V, Mat
 
+
+"""Module corresponding to the basic linear algebra interpreter. It supports basic linear algebra
+such as matrix and vector arithmetic.
+
+Example Usage:
+
+      >>> ast = parser.parse('[3 4 5] + [4 5 6]')
+      >>> evaluate(ast)
+      [7,9,11]
+
+"""
 def evaluate(ast):
+    """Evaluate a given basic linear algebra expression."""
     match ast:
         case Exp(exp):
             match exp:
