@@ -122,7 +122,7 @@ class Exps:
 
 class Exp:
     "PROGRAM node."
-    __match_args__ = ('exp')
+    __match_args__ = ('exp',)
     def __init__(self, exp):
         self.exp = exp
       
@@ -132,7 +132,7 @@ class Exp:
 
 class Int:
     "INT node."
-    __match_args__ = ('num')
+    __match_args__ = ('num',)
     def __init__(self, num):
         self.num = num
 
@@ -140,7 +140,7 @@ class Int:
         return f'(Int {self.num})'
 
 class Vec:
-    __match_args__ = ('elements')
+    __match_args__ = ('elements',)
     def __init__(self, elements):
         self.elements = elements
     
@@ -148,7 +148,7 @@ class Vec:
         return f'(Vec {self.elements})'
 
 class Matrix:
-    __match_args__ = ('elements')
+    __match_args__ = ('elements',)
     def __init__(self, elements):
         self.elements = elements
     
@@ -157,7 +157,7 @@ class Matrix:
 
 
 class Var:
-    __match_args__ = ('var')
+    __match_args__ = ('var',)
     def __init__(self, var):
         self.var = var
 
@@ -204,7 +204,7 @@ class Elements:
         return f'(Elements {self.e1}  {self.elements})'
 
 class Element:
-    __match_args__ = ('exp')
+    __match_args__ = ('exp',)
     "PROGRAM node."
     def __init__(self, exp):
         self.exp = exp
