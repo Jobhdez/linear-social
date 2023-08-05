@@ -1,0 +1,31 @@
+~~~~~~~
+Features
+~~~~~~
+
+1. Everytime a user computes a linear algebra expression the server needs to
+manipulate this linear algebra expression and show it to the friends of the
+user.
+
+2. count the number of linear algebra expressions that users make and rank
+users based on how many they have done. This will be done using redis.
+
+3. Everytime a user gets a friend request send an email to the user notifying them of this. This will be done with RabbitMQ and celery, async
+
+4. make recommendations of linear algebra expressions users should try based on past linear algebra expressions were computed; this will be done
+with redis.
+
+5. build a chat server
+
+6. implement cache
+
+~~~~~
+
+In addition:
+   - profile the server, try to determine the RPS and improve the RPS using
+   memcache, memoization if possible
+
+~~~~~
+
+Learning outcomes:
+	 - better understanding of django
+	 - experience with redis, celery, async, memcache, rabbitmq, websockets; of course I need to understand the fundamantals behind all this :-)
