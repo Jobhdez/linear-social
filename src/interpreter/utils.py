@@ -5,7 +5,7 @@ from parser import Vectors
 
 """Module corresponds to some utilities that enable the interpretation
 of linear algebra expressions by converting the matrix and vector AST nodes
-into Python objects."""
+into Python arrays."""
 
 def get_vector_elements(ast):
     """given an AST it takes the elements of a vector and puts them in a list."""
