@@ -1,7 +1,9 @@
-from parser import Elements
-from parser import Element
-from parser import Vec
-from parser import Vectors
+from src.interpreter.parser import (
+    Elements,
+    Element,
+    Vec,
+    Vectors,
+    )
 
 """Module corresponds to some utilities that enable the interpretation
 of linear algebra expressions by converting the matrix and vector AST nodes
