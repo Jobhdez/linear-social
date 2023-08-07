@@ -9,5 +9,5 @@ urlpatterns = [
     path('login/', views.user_login, name='login'),
     path('request/', views.request_friend, name='request'),
     path('accept/', views.accept_friend_request, name='accept'),
-    path('computeAlg/', views.compute_lalg_expression, name='lalg'),
+    path('compute/', views.compute_lalg_expression, name='lalg'),
     ]
