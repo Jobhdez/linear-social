@@ -16,17 +16,25 @@ def register(password, username, first_name, email):
     re = requests.post(link, data=data)
     return re.json()
 
-def request_friend(to_user_id, from_user, from_user_password):
+def request_friend(to_username, from_user, from_user_password):
     link = URL + 'request/'
-    data = {'id': to_user_id}
+    data = {'username': to_username}
     auth = (from_user, from_user_password)
     re = requests.post(link, data=data, auth=auth)
     return re.json()
 
-def accept(to_user_id, user_name_accepting, user_password_accepting):
+def accept(username_whos_accepted, user_whos_accepting, user_whos_accepting_password):
+    """
+    accept: accepts a friend request
+
+    Example:
+        >>> accept('jobpink3', 'jobpink', 'hello123')
+
+    Note: here 'jobpink` is accepting `jobpink3` who is the accepted
+    """
     link = URL + 'accept/'
-    data = {'id': to_user_id}
-    auth = (user_name_accepting, user_password_accepting)
+    data = {'username': username_whos_accepted}
+    auth = (user_whos_accepting, user_whos_accepting_password)
     re = requests.post(link, data=data, auth=auth)
     return re.json()
 
