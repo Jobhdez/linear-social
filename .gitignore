@@ -6,3 +6,4 @@
 src/server/api/usernames.txt
 *#
 src/python_client/.#client.py
+src/server/.env
