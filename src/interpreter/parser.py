@@ -6,7 +6,7 @@ language.
 
 Example:
    >>> parser.parse("[3 4 5] + [4 5 6]")
-   (Exp (Sum (Vec (Vec (Elements 3  (Elements 4  (Element5))))) (Vec (Vec (Elements 4  (Elements 5  (Element6)))))))
+   (Exp (Sum (Vec (Elements 3  (Elements 4  (Element5)))) (Vec (Elements 4  (Elements 5  (Element6))))))
 
 
 """
