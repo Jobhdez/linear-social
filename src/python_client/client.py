@@ -46,3 +46,11 @@ def compute(exp, user_name, user_password):
     re = requests.post(link, data=data, auth=auth)
     return re.json()
 
+
+def dashboard(username, password):
+    """this endpoints returns that activity stream of the account associated with
+    the parameters `username`, and `password`."""
+    link = URL + 'dashboard/'
+    auth=(username, password)
+    re = requests.post(link, auth=auth)
+    return re.json()
