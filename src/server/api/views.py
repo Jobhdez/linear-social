@@ -146,6 +146,6 @@ def linear_algebra_exp_detail(request, id):
     exp = LinearAlgebraExpression.objects.get(id=id)
 
     r = Recommender()
-    recommended_products = r.suggest_expressions_for([exp], 4)
-    data = serializers.serialize('json', recommended_products)
+    recommended_expressions = r.suggest_expressions_for([exp], 4)
+    data = serializers.serialize('json', recommended_expressions)
     return Response({'expression': data})
