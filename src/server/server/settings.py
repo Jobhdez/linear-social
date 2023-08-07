@@ -35,6 +35,9 @@ EMAIL_HOST_PASSWORD = str(os.getenv('GMAIL_PASSWORD'))
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 1
 # Application definition
 
 INSTALLED_APPS = [
