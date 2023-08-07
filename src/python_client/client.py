@@ -1,6 +1,16 @@
 import requests
 import json
 
+"""This module corresponds to a client for my API in `src/server/api/views.py`.
+I made this so I can test my API.
+
+Usage:
+     $ python manage.py runserver
+     $ python
+     >>> from src.python_client.client import *
+     >>> register(<password>, <username>, <first_name>, <email>)
+     >>> {'account': 'created'}
+"""
 
 URL = 'http://127.0.0.1:8000/api/'
 
@@ -48,7 +58,7 @@ def compute(exp, user_name, user_password):
 
 
 def dashboard(username, password):
-    """this endpoints returns that activity stream of the account associated with
+    """this endpoint returns the activity feed of the account associated with
     the parameters `username`, and `password`."""
     link = URL + 'dashboard/'
     auth=(username, password)
