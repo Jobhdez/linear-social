@@ -23,6 +23,7 @@ from actions.utils import create_action
 from django.core import serializers
 from actions.models import Action
 from .tasks import friend_request_sent
+from .recommender import Recommender
 User = get_user_model()
 
 @api_view(['POST'])
@@ -130,3 +131,21 @@ def dashboard(request):
     
 
     return Response({'actions': data})
+
+@api_view(['GET'])
+@login_required
+def list_linear_algebra_exps(request):
+    exps = LinearAlgebraExpression.objects.get()
+    data = LinearAlgebraExpSerializer(exps, many=True)
+
+    return Response({'expressions': data})
+
+@api_view(['GET'])
+@login_required
+def linear_algebra_exp_detail(request, id):
+    exp = LinearAlgebraExpression.objects.get(id=id)
+
+    r = Recommender()
+    recommended_products = r.suggest_expressions_for([exp], 4)
+    data = serializers.serialize('json', recommended_products)
+    return Response({'expression': data})
