@@ -1,7 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-"""Module that corresponds to the models of the server."""
+"""Module that corresponds to the models of the server.
+
+Models include: 
+
+         - `User` which inherits from AbstractUser to extend the fields with `friends`
+     which store the number of friends each user has.
+     
+         - `FriendRequest` which stores the friendship connection.
+         
+         - `LinearAlgebraExpression` which stores the linear algebra expression we will be evaluating.
+
+Usage:
+    >>> from api.models import User
+    >>> Users.object.get(id=<id>)
+    >>> <User>
+"""
 
 
 from django.db import models
