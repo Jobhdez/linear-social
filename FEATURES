@@ -12,7 +12,7 @@ users based on how many they have done. This will be done using redis.
 3. Everytime a user gets a friend request send an email to the user notifying them of this. This will be done with RabbitMQ and celery, async. DONE
 
 4. make recommendations of linear algebra expressions users should try based on past linear algebra expressions were computed; this will be done
-with redis.
+with redis. DONE 
 
 5. build a chat server
 
