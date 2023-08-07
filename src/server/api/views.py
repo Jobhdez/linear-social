@@ -78,7 +78,8 @@ def accept_friend_request(request):
     form = AcceptForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
-        friend_request = FriendRequest.objects.get(username=cd['username'])
+        accepted_user = User.objects.get(username=cd['username'])
+        friend_request = FriendRequest.objects.get(from_user=accepted_user, to_user=request.user)
         if friend_request.to_user == request.user:
             friend_request.to_user.friends.add(friend_request.from_user)
             friend_request.from_user.friends.add(friend_request.to_user)
