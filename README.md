@@ -1,5 +1,60 @@
 # A basic linear algebra interpreter web service
 The interpreter is basically done.
 
-## TODO
-make a social media site with a linear algebra interpreter theme :-)
+## Running the program
+
+### Dependencies
+#### docker
+```
+sudo pacman -S docker
+```
+
+#### RabbitMQ
+```
+docker pull rabbitmq
+```
+
+#### Celery
+```
+sudo pacman -S python-celery
+```
+#### Redis
+```
+$ docker pull redis
+$ pip install redis
+$ sudo pacman -S python-redis
+```
+
+### Required servers
+
+#### Django
+```
+python manage.py runserver
+```
+
+#### RabbitMQ
+```
+sudo docker run -d --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
+```
+
+#### Celery
+```
+celery -A server worker -l info
+```
+
+#### Redis
+```
+docker run -it --rm --name redis -p 6379:6379 redis
+```
+
+### Usage
+You can use the python client in `src/python_client/client.py` to call the api.
+
+Once you have at least a user or two you can use the bash script in `src/server/call_api.sh` but you will need to replace the user `jobpink` and the password with a new user of your choice.
+
+To run the bash script:
+
+```
+$ chmod +x call_api.sh
+$ ./call_api.sh
+```
