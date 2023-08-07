@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 # Set the URL for the Django API
 URL='http://127.0.0.1:8000/api/'
 
