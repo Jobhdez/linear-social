@@ -27,7 +27,7 @@ def register(request):
     form = UserRegistrationForm(request.POST)
     if form.is_valid():
         new_user = form.save(commit=False)
-        data = form.clean_data
+        data = form.cleaned_data
         new_user.set_password(data['password'])
         new_user.save()
 
@@ -40,9 +40,9 @@ def register(request):
 def user_login(request):
     form = LoginForm(request.POST)
     if form.is_valid():
-        data = form.clean_data
+        data = form.cleaned_data
         username = data['username']
-        password = data=['password']
+        password = data['password']
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
@@ -78,7 +78,7 @@ def accept_friend_request(request):
     form = AcceptForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
-        friend_request = Friend_Request.objects.get(id=cd['id'])
+        friend_request = FriendRequest.objects.get(id=cd['id'])
         if friend_request.to_user == request.user:
             friend_request.to_user.friends.add(friend_request.from_user)
             friend_request.from_user.friends.add(friend_request.to_user)
@@ -99,7 +99,7 @@ def compute_lalg_expression(request):
         data_expr = data_expr['exp']
         parsed_exp = parser.parse(data_expr)
         eval_data = evaluate(parsed_exp)
-        expr_model = LinearAlgebraExpression(exp=eval_data, user=request.user)
+        expr_model = LinearAlgebraExpression(exp=eval_data)
         expr_model.save()
         serializer = LinearAlgebraExpSerializer(expr_model)
 
