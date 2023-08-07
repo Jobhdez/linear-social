@@ -40,7 +40,7 @@ def accept(username_whos_accepted, user_whos_accepting, user_whos_accepting_pass
     Example:
         >>> accept('jobpink3', 'jobpink', 'hello123')
 
-    Note: here 'jobpink` is accepting `jobpink3` who is the accepted
+    Note: here 'jobpink` is accepting `jobpink3`.
     """
     link = URL + 'accept/'
     data = {'username': username_whos_accepted}
