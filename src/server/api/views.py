@@ -19,6 +19,9 @@ from rest_framework.response import Response
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from .serializers import LinearAlgebraExpSerializer
+from actions.utils import create_action
+from django.core import serializers
+from actions.models import Action
 User = get_user_model()
 
 @api_view(['POST'])
@@ -30,9 +33,11 @@ def register(request):
         data = form.cleaned_data
         new_user.set_password(data['password'])
         new_user.save()
+        create_action(new_user, 'has created an account')
 
         return Response({'account': 'created'})
-    
+    print(form.errors)
+    print(form.cleaned_data)
     return Response({'form': 'invalid'})
 
 
@@ -65,7 +70,6 @@ def request_friend(request):
         from_user = request.user
         to_user = User.objects.get(username=cd['username'])
         friend_request, created = FriendRequest.objects.get_or_create(from_user=from_user, to_user=to_user)
-
         if created:
             return Response({'request': 'sent'})
         else:
@@ -83,6 +87,7 @@ def accept_friend_request(request):
         if friend_request.to_user == request.user:
             friend_request.to_user.friends.add(friend_request.from_user)
             friend_request.from_user.friends.add(friend_request.to_user)
+            create_action(request.user, 'is friends with', accepted_user)
             friend_request.delete()
 
             return Response({"accept": "request"})
@@ -102,6 +107,22 @@ def compute_lalg_expression(request):
         eval_data = evaluate(parsed_exp)
         expr_model = LinearAlgebraExpression(exp=eval_data)
         expr_model.save()
+        create_action(request.user, 'computed an expression', expr_model)
         serializer = LinearAlgebraExpSerializer(expr_model)
 
         return Response(serializer.data)
+
+@api_view(['POST'])
+@login_required
+def dashboard(request):
+    actions = Action.objects.exclude(user=request.user)
+    friends_id = request.user.friends.values_list('id', flat=True)
+
+    if friends_id:
+        actions = actions.filter(user_id__in=friends_id)
+
+    actions = actions[:10]
+    data = serializers.serialize('json', actions)
+    
+
+    return Response({'actions': data})
