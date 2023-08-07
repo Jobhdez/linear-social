@@ -10,8 +10,9 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     """Inherits `AbstractUser` to allow the friendship between
     two users or more."""
-    friends = models.ManyToManyField("User", blank=True, related_name='related_friends')
-
+    friends = models.ManyToManyField("User", blank=True)
+    class Meta:
+        app_label = 'api'
    
 class FriendRequest(models.Model):
     """Class that enables a connection between two users."""
