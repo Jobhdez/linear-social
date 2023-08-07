@@ -4,7 +4,7 @@ Features
 
 1. Everytime a user computes a linear algebra expression the server needs to
 manipulate this linear algebra expression and show it to the friends of the
-user.
+user. DONE
 
 2. count the number of linear algebra expressions that users make and rank
 users based on how many they have done. This will be done using redis.
