@@ -39,6 +39,7 @@ def accept(username_whos_accepted, user_whos_accepting, user_whos_accepting_pass
 
     Example:
         >>> accept('jobpink3', 'jobpink', 'hello123')
+        >>> {'accept': 'request'}
 
     Note: here 'jobpink` is accepting `jobpink3`.
     """
