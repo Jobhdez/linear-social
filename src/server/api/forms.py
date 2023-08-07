@@ -31,10 +31,10 @@ class LoginForm(forms.Form):
 
 class RequestFriendForm(forms.Form):
     
-    id = forms.CharField()
+    username = forms.CharField()
 
 class AcceptForm(forms.Form):
-    id = forms.CharField()
+    username = forms.CharField()
 
 class LinearAlgebraExpForm(forms.ModelForm):
     class Meta:
