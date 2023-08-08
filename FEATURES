@@ -16,14 +16,13 @@ with redis. DONE
 
 5. build a chat server
 
-6. implement cache
+6. implement cache DONE 
 
 ~~~~~
 
 In addition:
    - profile the server, try to determine the RPS and improve the RPS using
    memcache, memoization if possible
-
 ~~~~~
 
 Learning outcomes:
