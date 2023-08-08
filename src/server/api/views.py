@@ -24,6 +24,9 @@ from django.core import serializers
 from actions.models import Action
 from .tasks import friend_request_sent
 from .recommender import Recommender
+from django.core.cache import cache
+from django.views.decorators.cache import cache_page
+import hashlib
 User = get_user_model()
 
 @api_view(['POST'])
@@ -100,7 +103,8 @@ def accept_friend_request(request):
             return Response({"request":"not accepted"})
 
 @api_view(['POST'])
-@login_required(login_url='/api/login/')
+#@login_required(login_url='/api/login/')
+@cache_page(60*15)
 @csrf_exempt
 def compute_lalg_expression(request):
     form = LinearAlgebraExpForm(request.POST)
@@ -108,13 +112,18 @@ def compute_lalg_expression(request):
         new_expr = form.save(commit=False)
         data_expr = form.cleaned_data
         data_expr = data_expr['exp']
+        #exp_hash = hashlib.md5(data_expr.encode()).hexdigest()
+       # lalg_exp = cache.get(exp_hash)
+        #if lalg_exp:
+         #   return Response(lalg_exp)
+       # else:
         parsed_exp = parser.parse(data_expr)
         eval_data = evaluate(parsed_exp)
         expr_model = LinearAlgebraExpression(exp=eval_data)
         expr_model.save()
         create_action(request.user, 'computed an expression', expr_model)
         serializer = LinearAlgebraExpSerializer(expr_model)
-
+       #cache.set(exp_hash, serializer.data)
         return Response(serializer.data)
 
 @api_view(['POST'])
