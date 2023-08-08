@@ -1,5 +1,15 @@
 # A basic linear algebra interpreter web service
-The interpreter is basically done.
+A small social media website.
+
+- The user can make friends with other users
+
+- Includes an activity stream application, i.e., news feed
+
+- Asynchronous email notification when a user receives a friend request
+
+- The user can make basic linear algebra computations over the network
+
+  - This includes of an interpreter: `parser -- [ast] --> evaluator`
 
 ## Running the program
 
