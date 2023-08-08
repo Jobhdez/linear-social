@@ -1,7 +1,7 @@
 from django.urls import path
 from api import views
 from django.urls import path
-
+from django.views.decorators.cache import cache_page
 app_name = 'api'
 
 urlpatterns = [
