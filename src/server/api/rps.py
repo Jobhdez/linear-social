@@ -11,7 +11,7 @@ def measure_rps(num_requests, fn):
     rps = num_requests / total_time
     return rps
 
-num_requests = 100
+num_requests = 500
 
 rps = measure_rps(num_requests, compute_lalg)
 print(f'requests per second: {rps}')
