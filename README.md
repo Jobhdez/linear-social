@@ -31,8 +31,15 @@ sudo pacman -S python-celery
 #### Redis
 ```
 $ docker pull redis
-$ pip install redis
+$ pip install redis ;; or
 $ sudo pacman -S python-redis
+```
+
+#### Memcache
+```
+$ docker pull memcached
+$ sudo pacman -S python-pymemcache ;; or
+$ pip install pymemcache
 ```
 
 ### Required servers
@@ -57,6 +64,10 @@ celery -A server worker -l info
 docker run -it --rm --name redis -p 6379:6379 redis
 ```
 
+#### Memcached
+```
+docker run -it --rm --name memcached -p 11211:11211 memcached -m 64
+```
 ### Usage
 You can use the python client in `src/python_client/client.py` to call the api.
 
