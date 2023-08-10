@@ -79,3 +79,12 @@ To run the bash script:
 $ chmod +x call_api.sh
 $ ./call_api.sh
 ```
+
+## Architecture
+```mermaid
+graph TD;
+    Client-->Django;
+    Django-->Memcache;
+    Django-->RabbitMQ;
+    Django-->Celery;
+```
