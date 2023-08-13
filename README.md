@@ -81,6 +81,20 @@ $ ./call_api.sh
 ```
 
 ## Architecture
+The architecture consists of a server that gets data in a cache if the data is in the cache otherwise it gets data from a database; moreover, it consists of a message broker, and a worker server that gets the messages from the message queue that the broker manages. By using the cache, in theory, we improve the performance and by using the message broker and worker we process asynchronous tasks such as sending an email notification to a given user who has received a friend request; this setup can also be used to send notifications to the user whose post has been liked.
+
+```mermaid
+graph TD;
+    Client-->Server;
+    Server-->Cache;
+    Server-->Database;
+    Server-->Message-Broker;
+    Message-Broker-->Worker;
+    Worker-->Message-Broker;
+```
+
+Specifically, the architecture consists of this:
+
 ```mermaid
 graph TD;
     Client-->Django;
