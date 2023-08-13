@@ -86,5 +86,7 @@ graph TD;
     Client-->Django;
     Django-->Memcache;
     Django-->RabbitMQ;
-    Django-->Celery;
+    RabbitMQ-->Celery;
+    Celery-->RabbitMQ;
+    
 ```
