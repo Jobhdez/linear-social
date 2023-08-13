@@ -9,7 +9,7 @@ A small social media website.
 
 - The user can make basic linear algebra computations over the network
 
-  - This includes of an interpreter: `parser --> [ast] --> evaluator`
+  - This includes an interpreter; this language system parsers basic linear algebra expressions and evaluates it.
 
 ## Running the program
 
