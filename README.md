@@ -1,15 +1,14 @@
 # A basic linear algebra interpreter web service
-A small social media website.
+A small social media back-end whose functionality includes:
 
-- The user can make friends with other users
+- a friend request system;
 
-- Includes an activity stream application, i.e., news feed
+- an activity stream application, i.e., news feed;
 
-- Asynchronous email notification when a user receives a friend request
+- an Asynchronous email notification system whereby a user recieves an email aynchronously when the user receives a friend request; and
 
-- The user can make basic linear algebra computations over the network
+- a basic linear algebra interpeter whereby a user can make lineara algebra computations over the network.
 
-  - This includes an interpreter; this language system parsers basic linear algebra expressions and evaluates it.
 
 ## Running the program
 
