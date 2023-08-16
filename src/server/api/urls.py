@@ -11,4 +11,6 @@ urlpatterns = [
     path('accept/', views.accept_friend_request, name='accept'),
     path('compute/', views.compute_lalg_expression, name='lalg'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('create_study/', views.create_study, name='create_study'),
+    path('join_study/', views.join_book_study, name='join_study'),
     ]
