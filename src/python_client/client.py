@@ -65,3 +65,17 @@ def dashboard(username, password):
     auth=(username, password)
     re = requests.post(link, auth=auth)
     return re.json()
+
+def create_study(username, password, study_name):
+    link = URL + 'create_study/'
+    auth=(username,password)
+    data = {'name': study_name}
+    re = requests.post(link, data=data, auth=auth)
+    return re.json()
+
+def join_study(username, password, to_user, study_name):
+    link = URL + 'join_study/'
+    auth = (username, password)
+    data = {'to_user': to_user, 'study_name': study_name}
+    re = requests.post(link, data=data, auth=auth)
+    return re.json()
