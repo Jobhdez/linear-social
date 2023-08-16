@@ -7,8 +7,10 @@ from .forms import (
     RequestFriendForm,
     AcceptForm,
     LinearAlgebraExpForm,
+    JoinBookStudyForm,
+    StudyForm,
     )
-from .models import FriendRequest, LinearAlgebraExpression
+from .models import FriendRequest, LinearAlgebraExpression, BookStudy
 from django.contrib.auth import (
     authenticate,
     login,
@@ -159,3 +161,41 @@ def linear_algebra_exp_detail(request, id):
     recommended_expressions = r.suggest_expressions_for([exp], 4)
     data = serializers.serialize('json', recommended_expressions)
     return Response({'expression': data})
+
+@api_view(['POST'])
+@login_required
+def join_book_study(request):
+    form = JoinBookStudyForm(request.POST)
+    if form.is_valid():
+        data = form.cleaned_data
+        from_user = request.user
+        to_user = data['to_user']
+        to_user = User.objects.get(username=to_user)
+        if from_user in to_user.friends.all():
+            book_study = BookStudy.objects.get(name=data['study_name'])
+            book_study.members.add(from_user)
+
+            return Response({'joined': "book study"})
+
+        else:
+            return Response({"not joined": "send a friend request first"})
+
+    else:
+        return Response({"form": "invalid"})
+
+
+@api_view(['POST'])
+@login_required
+def create_study(request):
+    form = StudyForm(request.POST)
+    if form.is_valid():
+        data = form.cleaned_data
+        usr = request.user
+        book_study = BookStudy.objects.create(owner=usr, name=data['name'])
+        usr.study_groups.add(book_study)
+        return Response({'study group': 'created'})
+
+    else:
+        return Response({'form': 'invalid'})
+
+                                
