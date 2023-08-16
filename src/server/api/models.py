@@ -26,6 +26,7 @@ class User(AbstractUser):
     """Inherits `AbstractUser` to allow the friendship between
     two users or more."""
     friends = models.ManyToManyField("User", blank=True)
+    study_groups = models.ManyToManyField("BookStudy")
     class Meta:
         app_label = 'api'
    
@@ -54,3 +55,14 @@ class LinearAlgebraExpression(models.Model):
 
     def __str__(self):
         return f'the evaluation of the linear algebra expression {self.exp} is {self.eval_exp}'
+
+class BookStudy(models.Model):
+    owner = models.ForeignKey(User, related_name='owner', on_delete=models.CASCADE)
+    members = models.ManyToManyField(User)
+    name = models.CharField(max_length=500, unique=True)
+
+    class Meta:
+        ordering = ['id']
+
+    def __str__(self):
+        return f'the {self.name} study group whose ownner is {self.owner.first_name}'
