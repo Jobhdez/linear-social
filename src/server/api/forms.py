@@ -40,3 +40,11 @@ class LinearAlgebraExpForm(forms.ModelForm):
     class Meta:
         model = LinearAlgebraExpression
         fields = ['exp']
+
+
+class StudyForm(forms.Form):
+    name = forms.CharField()
+
+class JoinBookStudyForm(forms.Form):
+    to_user = forms.CharField()
+    study_name = forms.CharField()
