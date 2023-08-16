@@ -14,9 +14,11 @@ users based on how many they have done. This will be done using redis.
 4. make recommendations of linear algebra expressions users should try based on past linear algebra expressions were computed; this will be done
 with redis. DONE 
 
-5. build a chat server
+5. build a chat server, user to user chat
 
-6. implement cache DONE 
+6. implement cache DONE
+
+7. allow users to form book clubs and each club will have its own chat server
 
 ~~~~~
 
