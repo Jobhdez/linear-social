@@ -5,9 +5,13 @@ A small social media back-end whose functionality includes:
 
 - an activity stream application, i.e., news feed;
 
-- an Asynchronous email notification system whereby a user recieves an email aynchronously when the user receives a friend request; and
+- an Asynchronous email notification system whereby a user recieves an email aynchronously when the user receives a friend request;
 
-- a basic linear algebra interpeter whereby a user can make lineara algebra computations over the network.
+- a basic linear algebra interpeter whereby a user can make lineara algebra computations over the network;
+
+- a way for users to create book studies; and
+
+- a way for users to chat within a book study group.
 
 
 ## Running the program
