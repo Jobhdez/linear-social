@@ -16,9 +16,9 @@ with redis. DONE
 
 5. build a chat server, user to user chat
 
-6. implement cache DONE
+6. implement cache, DONE
 
-7. allow users to form book clubs and each club will have its own chat server
+7. allow users to form book clubs and each club will have its own chat server, DONE
 
 ~~~~~
 
