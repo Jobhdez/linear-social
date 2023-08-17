@@ -41,6 +41,7 @@ REDIS_DB = 1
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'actions',
     'debug_toolbar',
+    'chat',
     
 ]
 
@@ -147,3 +149,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 INTERNAL_IPS = [
     '127.0.0.1',
     ]
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],
+            },
+        },
+    }
+
+ASGI_APPLICATION = 'server.asgi.application'
