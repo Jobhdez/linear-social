@@ -30,6 +30,9 @@ from django.core.cache import cache
 import hashlib
 User = get_user_model()
 
+"""Module includes endpoints for a small social media back-end :-)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+"""
 @api_view(['POST'])
 def register(request):
     """View that allows the given user register."""
