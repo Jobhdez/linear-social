@@ -147,7 +147,7 @@ def dashboard(request):
 @api_view(['GET'])
 @login_required
 def list_linear_algebra_exps(request):
-    exps = LinearAlgebraExpression.objects.get()
+    exps = LinearAlgebraExpression.objects.all()
     data = LinearAlgebraExpSerializer(exps, many=True)
 
     return Response({'expressions': data})
