@@ -117,9 +117,7 @@ def compute_lalg_expression(request):
         data_expr = data_expr['exp']
         exp_hash = hashlib.md5(data_expr.encode()).hexdigest()
         alg_exp = cache.get(exp_hash)
-        if lalg_exp:
-            return Response(lalg_exp)
-        else:
+        if not alg_exp:
             parsed_exp = parser.parse(data_expr)
             eval_data = evaluate(parsed_exp)
             expr_model = LinearAlgebraExpression(exp=eval_data)
@@ -128,6 +126,7 @@ def compute_lalg_expression(request):
             serializer = LinearAlgebraExpSerializer(expr_model)
             cache.set(exp_hash, serializer.data)
             return Response(serializer.data)
+        return Response(alg_exp)
 
     else:
         return Response({"form": "invalid"})
