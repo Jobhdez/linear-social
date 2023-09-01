@@ -20,6 +20,10 @@ with redis. DONE
 
 7. allow users to form book clubs and each club will have its own chat server, DONE
 
+8. implement a like button for the given users linear algebra expression and 
+          - count likes with redis and show top five exps
+          - whensomeone likes a linear algebra expression of a user send a async notification to the user so build a celery task
+
 ~~~~~
 
 In addition:
