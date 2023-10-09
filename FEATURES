@@ -2,6 +2,8 @@
 Features
 ~~~~~~
 
+Server:
+-------
 1. Everytime a user computes a linear algebra expression the server needs to
 manipulate this linear algebra expression and show it to the friends of the
 user. DONE
@@ -24,12 +26,12 @@ with redis. DONE
           - count likes with redis and show top five exps
           - whensomeone likes a linear algebra expression of a user send a async notification to the user so build a celery task
 
-~~~~~
+9. profile the server, try to determine the RPS and improve the RPS using
+   memcache, memoization if possible DONE
 
-In addition:
-   - profile the server, try to determine the RPS and improve the RPS using
-   memcache, memoization if possible
-~~~~~
+Interpreter
+~~~~~~~~~~~~
+Build a compiler for a toy computer algebra language in addition to the interpreter :-)
 
 Learning outcomes:
 	 - better understanding of django
