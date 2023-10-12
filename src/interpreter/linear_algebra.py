@@ -142,7 +142,17 @@ class M(Number):
 
         if isinstance(other, M):
 
-            return [compute_ith_vector(self.contents, other.contents, i) for i in range(len(self.contents))]
+            if len(self.contents) == len(other.contents) and len(self.contents[0]) == len(other.contents[0]):
+                m3 = [[0 for _ in range(len(self.contents))] for _ in range(len(self.contents))]
+                r = None
+                for k in range(len(self.contents)):
+                    for i in range(len(self.contents)):
+                        r = self.contents[i][k]
+                        for j in range(len(self.contents)):
+                            m3[i][j] += r * other.contents[k][j]
+                return m3
+            else:
+                return [compute_ith_vector(self.contents, other.contents, i) for i in range(len(self.contents))]
 
         elif isinstance(other, int):
 
