@@ -19,6 +19,11 @@ I improved RPS by about 7 percent by adding cache, from 4.88 requests per second
 ## Running the program
 
 ### Dependencies
+
+```
+$ pip install -r requirements.txt
+```
+
 #### docker
 ```
 sudo pacman -S docker
