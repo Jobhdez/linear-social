@@ -13,6 +13,8 @@ A small social media back-end whose functionality includes:
 
 - a way for users to chat within a book study group.
 
+## RPS
+I improved RPS by about 7 percent by adding cache, from 4.88 requests per second (non cache) to 5.21 requests per second (cache).
 
 ## Running the program
 
