@@ -126,7 +126,6 @@ def compute_lalg_expression(request):
             serializer = LinearAlgebraExpSerializer(expr_model)
             cache.set(exp_hash, serializer.data)
             return Response(serializer.data)
-
         return Response(alg_exp)
 
     else:
