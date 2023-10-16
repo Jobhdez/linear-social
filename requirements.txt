@@ -8,3 +8,4 @@ redis
 ply
 pymemcache
 channels
+requests
