@@ -5,6 +5,8 @@ from operator import (
     mul,
 )
 
+import threading
+
 """Module corresponding to the linear algebra functions that `evaluate` in
 src.interpreter.interpreter uses."""
 
@@ -142,7 +144,7 @@ class M(Number):
 
         if isinstance(other, M):
 
-            if len(self.contents) == len(other.contents) and len(self.contents[0]) == len(other.contents[0]):
+            if len(self.contents) == len(self.contents[0]) and len(other.contents[0]) == len(other.contents):
                 m3 = [[0 for _ in range(len(self.contents))] for _ in range(len(self.contents))]
                 r = None
                 for k in range(len(self.contents)):
@@ -227,3 +229,22 @@ def get_first(m, index):
         firsts.append(m[i][index])
             
     return firsts
+
+def parallel_sq_matrix_mul(mat1, mat2):
+    def multiply(row, a, b, result):
+        for i in range(len(b[0])):
+            for j in range(len(b)):
+                result[row][i] += a[row][j] * b[j][i]
+
+    m3 = [[0 for _ in range(len(mat1))] for _ in range(len(mat1))]
+
+    threads = []
+    for i in range(len(mat1)):
+        thread = threading.Thread(target=multiply, args=(i, mat1, mat2, m3))
+        thread.start()
+        threads.append(thread)
+
+    for thread in threads:
+        thread.join()
+
+    return m3
