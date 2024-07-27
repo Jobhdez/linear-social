@@ -5,12 +5,10 @@ from operator import (
     mul,
 )
 
-import threading
-
 """Module corresponding to the linear algebra functions that `evaluate` in
 src.interpreter.interpreter uses."""
 
-class Number:
+class LinearAlgObj:
 
     def __add__(self, other):
         
@@ -24,7 +22,7 @@ class Number:
 
         return self.mul(other)
 
-class Vector(Number):
+class Vector(LinearAlgObj):
     
     def add(self, other):
         """ 
@@ -88,7 +86,7 @@ class Vector(Number):
         else:
             raise ValueError("{} is not of type VECTOR or INT.".format(other))
 
-class M(Number):
+class M(LinearAlgObj):
 
     def add(self, other):
         """
