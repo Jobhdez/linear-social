@@ -43,10 +43,7 @@ def register(request):
         new_user.set_password(data['password'])
         new_user.save()
         create_action(new_user, 'has created an account')
-
         return Response({'account': 'created'})
-    print(form.errors)
-    print(form.cleaned_data)
     return Response({'form': 'invalid'})
 
 
@@ -62,12 +59,8 @@ def user_login(request):
         if user is not None:
             login(request, user)
             return Response({'login': 'Succesful'}) # should I respond with a status error?
-
-        else:
-            return Response({'Invalid': 'login'}) ## respond with a status error?
-
-    else:
-        return Response({'form': 'invalid'})
+        return Response({'Invalid': 'login'}) ## respond with a status error?
+    return Response({'form': 'invalid'})
 
 @api_view(['POST'])
 @login_required(login_url='/api/login/')
@@ -84,8 +77,7 @@ def request_friend(request):
         friend_request_sent.delay(from_user_username, to_user_username)
         if created:
             return Response({'request': 'sent'})
-        else:
-            return Response({'request': 'was sent already'})
+        return Response({'request': 'was sent already'})
 
 @api_view(['POST'])
 @login_required(login_url='/api/login/')
@@ -101,10 +93,8 @@ def accept_friend_request(request):
             friend_request.from_user.friends.add(friend_request.to_user)
             create_action(request.user, 'is friends with', accepted_user)
             friend_request.delete()
-
             return Response({"accept": "request"})
-        else:
-            return Response({"request":"not accepted"})
+        return Response({"request":"not accepted"})
 
 @api_view(['POST'])
 @login_required(login_url='/api/login/')
@@ -127,9 +117,7 @@ def compute_lalg_expression(request):
             cache.set(exp_hash, serializer.data)
             return Response(serializer.data)
         return Response(alg_exp)
-
-    else:
-        return Response({"form": "invalid"})
+    return Response({"form": "invalid"})
     
 @api_view(['POST'])
 @login_required
@@ -176,14 +164,9 @@ def join_book_study(request):
         if from_user in to_user.friends.all():
             book_study = BookStudy.objects.get(name=data['study_name'])
             book_study.members.add(from_user)
-
             return Response({'joined': "book study"})
-
-        else:
-            return Response({"not joined": "send a friend request first"})
-
-    else:
-        return Response({"form": "invalid"})
+        return Response({"not joined": "send a friend request first"})
+    return Response({"form": "invalid"})
 
 
 @api_view(['POST'])
@@ -196,8 +179,6 @@ def create_study(request):
         book_study = BookStudy.objects.create(owner=usr, name=data['name'])
         usr.study_groups.add(book_study)
         return Response({'study group': 'created'})
-
-    else:
-        return Response({'form': 'invalid'})
+    return Response({'form': 'invalid'})
 
                                 
