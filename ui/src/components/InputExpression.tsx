@@ -36,14 +36,14 @@ const InputExpression = () => {
         op = "-";
         break;
       case "dot-product":
-        op = "\\cdot";
+        op = "*";
         break;
       default:
         op = "+";
     }
 
     setMathExp(
-      `$$\\begin{pmatrix} ${vec1.join(" \\\\ ")} \\end{pmatrix} ${op} \\begin{pmatrix} ${vec2.join(" \\\\ ")} \\end{pmatrix}$$`,
+      `$$\\begin{pmatrix} ${vec1.join(" & ")} \\end{pmatrix} ${op} \\begin{pmatrix} ${vec2.join(" & ")} \\end{pmatrix}$$`,
     );
   };
 
