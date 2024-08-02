@@ -5,7 +5,10 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { MathJaxProvider, MathJaxFormula } from "mathjax3-react";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
 
 const InputExpression = () => {
   const [vector1, setVector1] = React.useState<string>("");
@@ -32,7 +35,7 @@ const InputExpression = () => {
       case "subtract":
         op = "-";
         break;
-      case "multiplication":
+      case "dot-product":
         op = "\\cdot";
         break;
       default:
@@ -45,49 +48,47 @@ const InputExpression = () => {
   };
 
   return (
-    <Box
-      sx={{
-        width: 500,
-        maxWidth: "100%",
-      }}
-    >
-      <Box mb={2}>
-        <TextField
-          label="Vector 1"
-          id="vector1-input"
-          fullWidth
-          onChange={(e) => setVector1(e.target.value)}
-        />
-      </Box>
-      <Box mb={2}>
-        <TextField
-          label="Vector 2"
-          id="vector2-input"
-          fullWidth
-          onChange={(e) => setVector2(e.target.value)}
-        />
-      </Box>
-      <Box mb={2}>
-        <FormControl fullWidth>
-          <InputLabel id="operator-select-label">Operator</InputLabel>
-          <Select
-            labelId="operator-select-label"
-            id="operator-select"
-            label="Operation"
-            onChange={(e) => compileToMathJax(e.target.value as string)}
-          >
-            <MenuItem value="add">Add</MenuItem>
-            <MenuItem value="subtract">Subtract</MenuItem>
-            <MenuItem value="dot-product">Dot Product</MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
-      <div>
-        <MathJaxProvider>
-          <MathJaxFormula formula={mathExp} />
-        </MathJaxProvider>
-      </div>
-    </Box>
+    <Card sx={{ width: 500, maxWidth: "100%" }}>
+      <CardHeader title="Vector Operations" />
+      <CardContent>
+        <Box mb={2}>
+          <TextField
+            label="Vector 1"
+            id="vector1-input"
+            fullWidth
+            onChange={(e) => setVector1(e.target.value)}
+          />
+        </Box>
+        <Box mb={2}>
+          <TextField
+            label="Vector 2"
+            id="vector2-input"
+            fullWidth
+            onChange={(e) => setVector2(e.target.value)}
+          />
+        </Box>
+        <Box mb={2}>
+          <FormControl fullWidth>
+            <InputLabel id="operator-select-label">Operator</InputLabel>
+            <Select
+              labelId="operator-select-label"
+              id="operator-select"
+              label="Operation"
+              onChange={(e) => compileToMathJax(e.target.value as string)}
+            >
+              <MenuItem value="add">Add</MenuItem>
+              <MenuItem value="subtract">Subtract</MenuItem>
+              <MenuItem value="dot-product">Dot Product</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        <Box mt={2}>
+          <MathJaxProvider>
+            <MathJaxFormula formula={mathExp} />
+          </MathJaxProvider>
+        </Box>
+      </CardContent>
+    </Card>
   );
 };
 
