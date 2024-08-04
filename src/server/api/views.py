@@ -100,26 +100,29 @@ def accept_friend_request(request):
 @login_required(login_url='/api/login/')
 @csrf_exempt
 def compute_lalg_expression(request):
+    def list_to_string(lst):
+      return '[' + ' '.join(map(str, lst)) + ']'
+    
     form = LinearAlgebraExpForm(request.POST)
     if form.is_valid():
         new_expr = form.save(commit=False)
         data_expr = form.cleaned_data
         data_expr = data_expr['exp']
         exp_hash = hashlib.md5(data_expr.encode()).hexdigest()
-        alg_exp = cache.get(exp_hash)
-        if not alg_exp:
-            parsed_exp = parser.parse(data_expr)
-            eval_data = evaluate(parsed_exp)
-            expr_model = LinearAlgebraExpression(exp=eval_data)
-            expr_model.save()
-            create_action(request.user, 'computed an expression', expr_model)
-            serializer = LinearAlgebraExpSerializer(expr_model)
-            cache.set(exp_hash, serializer.data)
-            return Response(serializer.data)
-        return Response(alg_exp)
+        #alg_exp = cache.get(exp_hash)
+        #if not alg_exp:
+        parsed_exp = parser.parse(data_expr)
+        eval_data = evaluate(parsed_exp)
+        eval_data = list_to_string(eval_data)
+        expr_model = LinearAlgebraExpression(exp=eval_data)
+        expr_model.save()
+        create_action(request.user, 'computed an expression', expr_model)
+        serializer = LinearAlgebraExpSerializer(expr_model)
+        #    cache.set(exp_hash, serializer.data)
+        return Response(serializer.data)
+     #   return Response(alg_exp)
     return Response({"form": "invalid"})
-    
-@api_view(['POST'])
+  
 @login_required
 def dashboard(request):
     actions = Action.objects.exclude(user=request.user)
