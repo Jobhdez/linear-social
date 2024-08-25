@@ -1,4 +1,4 @@
-# A basic linear algebra interpreter web service
+# linear social
 A small social media back-end whose functionality includes:
 
 - a friend request system;
